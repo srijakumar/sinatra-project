@@ -1,3 +1,3 @@
-class TenantsController
+class TenantsController < ApplicationController
 
 end
