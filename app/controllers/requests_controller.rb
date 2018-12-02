@@ -1,4 +1,5 @@
 class RequestsController < ApplicationController
+  require 'pry'
 
 get '/request' do
   if logged_in?
@@ -6,6 +7,7 @@ get '/request' do
     erb :'requests/requests'
   else
     redirect to '/login'
+end
 end
 
 get '/requests/new' do
@@ -23,8 +25,7 @@ post '/requests' do
     if params["content"] == ""
       redirect '/requests/new'
     else
-
-    @request=Request.new(:content => params["content"], :tenant_id => current_tenant.id, :apt_num => params["apt_num"], :date => params["date"])
+      @request=Request.new(:content => params["content"], :tenant_id => current_tenant.id, :apt_num => params["apt_num"], :date => params["date"])
 
     if @request.save
      redirect to "/requests/#{@request.id}"
@@ -35,6 +36,28 @@ post '/requests' do
   end
   redirect to '/login'
 end
+end
+
+get '/requests/:id' do
+  if logged_in?
+    @request = Request.find_by_id(params[:id])
+    erb :'requests/show_requests'
+  else
+    redirect to '/login'
+  end
+end
+
+get '/requests/:id/edit' do
+  if logged_in?
+    @request = Request.find_by_id(params[:id])
+    if @request && @request.tenant == current_tenant
+      erb :'requests/edit_request'
+    else
+      redirect to '/requests'
+    end
+  else
+    redirect to '/login'
+  end
 end
 
 end
