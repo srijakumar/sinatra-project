@@ -60,4 +60,26 @@ get '/requests/:id/edit' do
   end
 end
 
+patch '/requests/:id' do
+  if logged_in?
+    if params[:content] ==""
+      redirect to "/requests/#{params[:id]}/edit"
+    else
+      @request = Request.find_by_id(params[:id])
+      if @request && @request.tenant == current_tenant
+        if @request.update(content: params[:content])
+          redirect to "/requests/#{@request.id}"
+        else
+          redirect to "/requests/#{@request.id}/edit"
+        end
+      else
+        redirect to '/tweets'
+      end
+    end
+  else
+    redirect '/login'
+  end
+end
+
+
 end
