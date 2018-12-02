@@ -1,0 +1,10 @@
+<p><%= @request.content %></p>
+
+
+<form action="/requests/<%= @request.id %>/delete" method="post">
+  <input id = "hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Request">
+
+</form>
+
+<a href="/requests/<%=@request.id %>/edit">Edit Request</a>

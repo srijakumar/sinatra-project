@@ -1,0 +1,9 @@
+<h1>Welcome, <%=current_tenant.username %>! Please see all your requests below:</h1>
+
+<% @requests.each do |request|%>
+<div>
+<%= request.content %>
+</div>
+<% end %>
+
+<p>Create a new request <a href="/requests/new">Create Request</a></p>
