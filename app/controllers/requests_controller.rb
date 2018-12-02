@@ -82,4 +82,17 @@ patch '/requests/:id' do
 end
 
 
+delete '/requests/:id/delete' do
+  if logged_in?
+    @request = Request.find_by_id(params[:id])
+
+    if @request && @request.tenant == current_tenant
+      @request.delete
+    end
+    redirect to '/requests'
+  else
+      redirect to '/login'
+  end
+end
+
 end
