@@ -1,1 +1,6 @@
-<p>Hello World</p>
+<p> Here are your requests, <%= @tenant.username %>
+<% @tenant.requests.each do |request| %>
+  <div>
+    <%= request.content %>
+  </div>
+<% end %>
