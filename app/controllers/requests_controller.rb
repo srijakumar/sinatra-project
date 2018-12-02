@@ -1,7 +1,7 @@
 class RequestsController < ApplicationController
   require 'pry'
 
-get '/request' do
+get '/requests' do
   if logged_in?
     @requests = Request.all
     erb :'requests/requests'
