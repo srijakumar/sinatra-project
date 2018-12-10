@@ -2,6 +2,20 @@
 <br>
 <h4>We are committed to making your stay as comfortable as possible. Please follow the instructions below to enter a service request </h4>
 <br>
-<a href="/signup">New Tenants</a>
-<br>
-<a href="/login">Existing Tenants</a>
+
+
+
+<nav>
+  <% if logged_in? %>
+
+    <a href="/requests/new"> Create Request </a>
+    <a href="/logout"> Log Out </a>
+    <p>Welcome, <%=current_tenant.username %></p>
+
+  <% else %>
+    <a href="/signup">New Tenants</a>
+    <br>
+    <a href="/login"> Existing Tenants </a>
+  <%end %>
+
+</nav>
