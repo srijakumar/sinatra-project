@@ -25,7 +25,7 @@ post '/requests' do
     if params["content"] == ""
       redirect '/requests/new'
     else
-      @request=Request.new(:content => params["content"], :tenant_id => current_tenant.id, :apt_num => params["apt_num"], :date => params["date"])
+      @request=Request.new(:content => params[:content], :tenant_id => current_tenant.id, :apt_num => params[:apt_num], :date => params[:date])
 
     if @request.save
      redirect to "/requests/#{@request.id}"
