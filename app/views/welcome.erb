@@ -8,9 +8,10 @@
 <nav>
   <% if logged_in? %>
 
-    <a href="/requests/new"> Create Request </a>
+  <p>Welcome, <%=current_tenant.username %></p>
+    <a href="/requests/new"> Create Request </a> <br>
     <a href="/logout"> Log Out </a>
-    <p>Welcome, <%=current_tenant.username %></p>
+
 
   <% else %>
     <a href="/signup">New Tenants</a>
