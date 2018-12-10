@@ -2,7 +2,11 @@
 
 <% @requests.each do |request|%>
 <div>
-<%= request.content %>
+
+    <%= request.content %>
+    <br>
+    <p>This request was created on <%= request.date %> for <%= request.apt_num %></p>
+    
 </div>
 <% end %>
 <br>
