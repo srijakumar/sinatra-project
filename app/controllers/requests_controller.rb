@@ -73,7 +73,7 @@ patch '/requests/:id' do
           redirect to "/requests/#{@request.id}/edit"
         end
       else
-        redirect to '/tweets'
+        redirect to '/requests'
       end
     end
   else
