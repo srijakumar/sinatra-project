@@ -87,7 +87,7 @@ delete '/requests/:id/delete' do
     @ticket = Request.find_by_id(params[:id])
 
     if @ticket && @ticket.tenant == current_tenant
-      @request.delete
+      @ticket.delete
     end
     redirect to '/requests'
   else
