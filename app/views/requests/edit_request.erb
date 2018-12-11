@@ -1,6 +1,6 @@
 <p>Edit your request below</p>
-<form action="/requests/<%= @request.id %>" method="post">
+<form action="/requests/<%= @ticket.id %>" method="post">
   <input id = "hidden" type="hidden" name="_method" value="PATCH">
-  <input type="text" name="content" value="<%= @request.content %>">
+  <input type="text" name="content" value="<%= @ticket.content %>">
   <input type="submit" value="submit">
 </form>

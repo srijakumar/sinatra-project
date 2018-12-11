@@ -25,10 +25,10 @@ post '/requests' do
     if params["content"] == ""
       redirect '/requests/new'
     else
-      @request=Request.new(:content => params[:content], :tenant_id => current_tenant.id, :apt_num => params[:apt_num], :date => params[:date])
+      @ticket=Request.new(:content => params[:content], :tenant_id => current_tenant.id, :apt_num => params[:apt_num], :date => params[:date])
 
-    if @request.save
-     redirect to "/requests/#{@request.id}"
+    if @ticket.save
+     redirect to "/requests/#{@ticket.id}"
     else
       redirect to '/requests/new'
     end
@@ -40,7 +40,7 @@ end
 
 get '/requests/:id' do
   if logged_in?
-    @request = Request.find_by_id(params[:id])
+    @ticket = Request.find_by_id(params[:id])
     erb :'requests/show_requests'
   else
     redirect to '/login'
@@ -49,8 +49,8 @@ end
 
 get '/requests/:id/edit' do
   if logged_in?
-    @request = Request.find_by_id(params[:id])
-    if @request && @request.tenant == current_tenant
+    @ticket = Request.find_by_id(params[:id])
+    if @ticket && @ticket.tenant == current_tenant
       erb :'requests/edit_request'
     else
       redirect to '/requests'
@@ -65,12 +65,12 @@ patch '/requests/:id' do
     if params[:content] ==""
       redirect to "/requests/#{params[:id]}/edit"
     else
-      @request = Request.find_by_id(params[:id])
-      if @request && @request.tenant == current_tenant
-        if @request.update(content: params[:content])
-          redirect to "/requests/#{@request.id}"
+      @ticket = Request.find_by_id(params[:id])
+      if @ticket && @ticket.tenant == current_tenant
+        if @ticket.update(content: params[:content])
+          redirect to "/requests/#{@ticket.id}"
         else
-          redirect to "/requests/#{@request.id}/edit"
+          redirect to "/requests/#{@ticket.id}/edit"
         end
       else
         redirect to '/requests'
@@ -84,9 +84,9 @@ end
 
 delete '/requests/:id/delete' do
   if logged_in?
-    @request = Request.find_by_id(params[:id])
+    @ticket = Request.find_by_id(params[:id])
 
-    if @request && @request.tenant == current_tenant
+    if @ticket && @ticket.tenant == current_tenant
       @request.delete
     end
     redirect to '/requests'
