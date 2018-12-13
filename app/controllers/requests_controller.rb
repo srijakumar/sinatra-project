@@ -3,7 +3,9 @@ class RequestsController < ApplicationController
 
 get '/requests' do
   if logged_in?
-    @requests = Request.all
+
+    @requests = Request.where(tenant_id: current_tenant.id)
+
     erb :'requests/requests'
   else
     redirect to '/login'

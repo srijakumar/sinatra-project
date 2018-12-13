@@ -1,4 +1,5 @@
-<p><%= @ticket.content %></p>
+<p></p>
+<p>Request: <%= @ticket.content %>, has been created for apartment <%= request.apt_num %></p>
 
 
 <form action="/requests/<%= @ticket.id %>/delete" method="post">
@@ -8,3 +9,9 @@
 </form>
 
 <a href="/requests/<%=@ticket.id %>/edit">Edit Request</a>
+
+<br>
+
+<p>Go back to all requests <a href="/requests">here</a></p>
+<br>
+<p><a href="/logout">Log Out</a></p>
