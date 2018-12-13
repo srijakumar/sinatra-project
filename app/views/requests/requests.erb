@@ -1,4 +1,4 @@
-<h1>Welcome, <%=current_tenant.username %>! Please see all your requests below:</h1>
+<h1>Welcome, <%=current_tenant.username %>! Please see all your requests below:</h1><br>
 
 <% @requests.each do |request|%>
 <div>
@@ -9,7 +9,7 @@
 
 </div>
 <% end %>
-<br>
+
 <p>Create a new request <a href="/requests/new">Create Request</a></p>
-<br>
+
 <p><a href="/logout">Log Out</a></p>
