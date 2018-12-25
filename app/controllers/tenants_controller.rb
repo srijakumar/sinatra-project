@@ -33,9 +33,9 @@ get '/login' do
 end
 
 post '/login' do
-  tenant = Tenant.find_by(:username => params[:username])
-  if tenant && tenant.authenticate(params[:password])
-    session[:tenant_id] = tenant.id
+  @tenant = Tenant.find_by(:username => params[:username])
+  if @tenant && @tenant.authenticate(params[:password])
+    session[:tenant_id] = @tenant.id #logging in
     redirect to '/requests'
   else
     redirect to '/signup'
