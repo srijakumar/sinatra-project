@@ -1,7 +1,7 @@
 class TenantsController < ApplicationController
 
 get '/tenants/:slug' do
-  if logged_in?(session)
+  if logged_in?
     @tenant = Tenant.find_by_slug(params[:slug])
     erb :'tenants/show'
   end
@@ -39,8 +39,8 @@ end
 
 
 post '/login' do
-  tenant = Tenant.find_by(username: params[:username])
-
+  tenant = Tenant.find_by(email: params[:email])
+  #binding.pry
   if tenant && tenant.authenticate(params[:password])
     session[:tenant_id] = tenant.id #logging in
     redirect to "/tenants/#{tenant.slug}"
