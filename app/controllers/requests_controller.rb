@@ -32,6 +32,7 @@ post '/requests' do
     if @ticket.save
      redirect to "/requests/#{@ticket.id}"
     else
+      flash[:error] = "All fields are required."
       redirect to '/requests/new'
     end
 
@@ -72,6 +73,7 @@ patch '/requests/:id' do
         if @ticket.update(content: params[:content])
           redirect to "/requests/#{@ticket.id}"
         else
+          flash[:error] = "All fields are required."
           redirect to "/requests/#{@ticket.id}/edit"
         end
       else
