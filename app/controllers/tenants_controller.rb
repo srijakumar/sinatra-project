@@ -18,7 +18,7 @@ get '/signup' do
 
 post '/signup' do
   if params[:username] == "" || params[:email] == "" || params[:password] == ""
-    flash[:error] = "All fields are required."
+    #flash[:error] = "All fields are required."
     redirect to '/signup'
   else
     @tenant = Tenant.new(:username => params[:username], :email => params[:email], :password => params[:password])
@@ -46,7 +46,7 @@ post '/login' do
     session[:tenant_id] = tenant.id #logging in
     redirect to "/tenants/#{tenant.slug}"
   else
-    flash[:error] = "Your username or password is incorrect."
+    #flash[:error] = "Your username or password is incorrect."
     redirect to '/signup'
   end
 end
