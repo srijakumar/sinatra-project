@@ -18,6 +18,8 @@
 
         <%= yield %>
 
+        flash[:error] if flash[:error]
+
       <footer class="branding">
         <small>&copy; 2018 <strong>SinatraProject</strong></small>
       </footer>

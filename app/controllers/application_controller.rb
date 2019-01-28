@@ -24,6 +24,13 @@ class ApplicationController < Sinatra::Base
    def current_tenant
      @current_tenant ||= Tenant.find_by(id: session[:tenant_id]) if session[:tenant_id]
    end
+
+   def redirect_if_not_logged_in
+     if !current_tenant
+       redirect to "/login"
+     end
+   end
+
 end
 
 end

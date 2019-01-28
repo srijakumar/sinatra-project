@@ -16,23 +16,27 @@ get '/signup' do
     end
   end
 
-post '/signup' do
-  if params[:username] == "" || params[:email] == "" || params[:password] == ""
-    #flash[:error] = "All fields are required."
-    redirect to '/signup'
-  else
-    @tenant = Tenant.new(:username => params[:username], :email => params[:email], :password => params[:password])
-    @tenant.save
-    session[:tenant_id] = @tenant.id
-    redirect to '/requests'
-  end
-end
+  post '/signup' do
+      if params[:username] == "" || params[:email] == "" || params[:password] == "" || Tenant.find_by(email: params[:email])
+        redirect to '/signup'
+        flash[:error] = "Email is already in use."
+    #  elsif
+        #  flash[:error] = "Email is already in use."
+          #redirect to '/signup'
 
-get '/login' do
+      else
+        @tenant = Tenant.new(:username => params[:username], :email => params[:email], :password => params[:password])
+        @tenant.save
+        session[:tenant_id] = @tenant.id
+        redirect to '/requests'
+      end
+    end
+
+get ('/login') do
   if !logged_in?
     erb :'tenants/login'
   else
-    redirect to "/tenants/#{current_tenant.slug(:username)}"
+    redirect to "/tenants/#{current_tenant.slug()}"
   end
 end
 

@@ -2,14 +2,10 @@ class RequestsController < ApplicationController
   require 'pry'
 
 get '/requests' do
-  if logged_in?
-
-    @requests = Request.where(tenant_id: current_tenant.id)
-
-    erb :'requests/requests'
-  else
-    redirect to '/login'
-end
+      redirect_if_not_logged_in
+      @requests = Request.where(tenant_id: current_tenant.id)
+      erb :'requests/requests'
+    
 end
 
 get '/requests/new' do
